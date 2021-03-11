@@ -1,9 +1,29 @@
 pipeline {
-    agent { 
+	agent { 
 		docker { 
 			image 'alpine:latest' 
 		}
 	}
-    stages {
-    }
+	parameters { 
+        	choice(name: 'BUILD', choices: ['Yes', 'No'], description: 'Should Build?')
+	}
+	stages {
+		stage('build') {
+			when {
+				environment name: 'BUILD', value: 'Yes'
+			}
+			steps {
+				echo "build"
+			}
+		}
+		
+		stage('no build') {
+			when {
+				environment name: 'BUILD', value: 'No'
+			}
+			steps {
+				echo "failed to build"
+			}
+		}
+	}
 }
