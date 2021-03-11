@@ -6,16 +6,16 @@ pipeline {
 	}
     stages {
     	stage('build') {
-		steps{
-			ex_5()
+		steps {
+			storeCurrentDate()
 			sh 'sleep 10s'
-			ex_5()
+			storeCurrentDate()
 		}
 	}
     }
 }
 
-def ex_5() {
+def storeCurrentDate() {
 	sh 'date > file.txt'
 	sh 'cat file.txt'
 }
