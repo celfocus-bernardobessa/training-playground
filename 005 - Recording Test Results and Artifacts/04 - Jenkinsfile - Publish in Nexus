@@ -1,40 +1,36 @@
 pipeline {
     agent { 
-		docker { 
-			image 'maven:3.3.3'
-			args '--network training-playground'
-		}
-	}
+        docker { 
+            image 'maven:3.3.3'
+            args '--network training-playground'
+        }
+    }
     stages {
         stage('build') {
             steps {
-	    	configFileProvider(
-			[configFile(fileId: 'settings.xml', targetLocation: 'settings-copy.xml')]) {
-			sh "mvn install \
-				-s settings-copy.xml \
-				-f '005 - Recording Test Results and Artifacts/02 - Java Unit Tests' \
-				org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar \
-				-Dsonar.host.url='http://sonarqube:9000/' \
-				-Dsonar.projectKey='project' \
-				-Dsonar.projectName='projectName'" 
-		    }
+                configFileProvider([configFile(fileId: "settings.xml", targetLocation: 'settings-copy.xml')]) {
+                    sh "mvn install \
+                            -s settings-copy.xml \
+                            -f '005 - Recording Test Results and Artifacts/Java Application'"
+                }
             }
         }
-	
-	stage('deploy') {
-		steps {
-			sh "mvn deploy:deploy-file \
-				-s settings-copy.xml \
-				-Durl='http://nexus:8081/repository/maven-releases/' \
-				-Dfile '005 - Recording Test Results and Artifacts/02 - Java Unit Tests/target/java-app-1.0.0.jar' \
-				-DrepositoryId='maven-releases' \
-				-Dpackaging=jar \
-				-DgeneratePom=true \
-				-DgeneratePom.description='Gerado pelo Bernardo :)' \
-				-DgroupId='training-playground' \
-				-DartifactId='training-playground-java-app' \
-				-Dversion=1.0.0"
-		}
-	}
+        stage('publish') {
+            steps {
+                configFileProvider([configFile(fileId: "settings.xml", targetLocation: 'settings-copy.xml')]) {
+                    sh "mvn deploy:deploy-file                                                                              \
+                            -s settings-copy.xml                                                                            \
+                            -Durl='http://nexus:8081/repository/maven-releases/'                                            \
+                            -DrepositoryId='maven-releases'                                                                 \
+                            -Dfile='005 - Recording Test Results and Artifacts/Java Application/target/java-app-1.0.0.jar'  \
+                            -Dpackaging=jar                                                                                 \
+                            -DgeneratePom=true                                                                              \
+                            -DgeneratePom.description='Generated from training-playground'                                  \
+                            -DgroupId='training-playground'                                                                 \
+                            -DartifactId='training-playground-java-app'                                                     \
+                            -Dversion=1.0.0"
+                }
+            }
+        }
     }
 }
