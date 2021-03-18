@@ -35,7 +35,6 @@ pipeline {
                 echo "Notification TEST2: $NUMBER_OF_ISSUES_TEST2"
                 echo "Notification TEST3: $NUMBER_OF_ISSUES_TEST3"
                 echo "Notification TEST4: $NUMBER_OF_ISSUES_TEST4"
-                echo "Notification TEST5: $NUMBER_OF_ISSUES_TEST5"
             }
         }
     }
