@@ -14,9 +14,9 @@ pipeline {
                 
                 script {
                 	echo "VAR: " + env.VAR
-                	env.VAR=C
+                	env.VAR="C"
                 	echo "VAR: " + env.VAR
-                        env.VAR=D	
+                        env.VAR="D"	
 		}
             }
         }
