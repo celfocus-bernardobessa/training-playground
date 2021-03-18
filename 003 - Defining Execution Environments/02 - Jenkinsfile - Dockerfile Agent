@@ -1,8 +1,8 @@
 pipeline {
     agent {
     	dockerfile { 
-			filename '03 - Dockerfile - Install Software Dockerfile' 
-			dir '02 - Dockerfile - Dockerfile Agent'
+			filename '02 - Dockerfile - Dockerfile Agent' 
+			dir '003 - Defining Execution Environments'
 			additionalBuildArgs '--build-arg "ENV_VARIABLE=Value for build"'
 			args '-e "ENV_VARIABLE=Value for execution"'
 		}
