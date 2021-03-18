@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('script') {
             steps {
-                sh "VAR=B"
+                sh "$VAR=B"
                 
                 script {
                 	echo "VAR: " + env.VAR
