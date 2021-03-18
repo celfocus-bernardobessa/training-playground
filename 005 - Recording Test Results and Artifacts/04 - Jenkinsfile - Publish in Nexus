@@ -25,7 +25,7 @@ pipeline {
 		steps {
 			sh "mvn deploy:deploy-file \
 				-s settings-copy.xml \
-				-Durl='http://nexus:8081/repository/maven-releases/'
+				-Durl='http://nexus:8081/repository/maven-releases/' \
 				-Dfile '005 - Recording Test Results and Artifacts/02 - Java Unit Tests'/target/java-app-1.0.0.jar \
 				-DrepositoryId='maven-releases' \
 				-Dpackaging=jar \
