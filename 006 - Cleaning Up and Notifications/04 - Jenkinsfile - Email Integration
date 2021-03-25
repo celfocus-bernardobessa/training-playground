@@ -9,7 +9,7 @@ pipeline {
             steps {
                 emailext 	subject: "Training Playground (Jenkins) - Email subject",
 							to: "bernardo.bessa@celfocus.com",
-							body: "Application was built"
+							body: "Done"
             }
         }
     }
