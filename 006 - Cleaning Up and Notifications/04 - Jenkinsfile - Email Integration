@@ -1,16 +1,17 @@
 pipeline {
-    agent { 
+    	agent { 
 		docker { 
 			image 'alpine:latest' 
 		}
 	}
-    stages {
-        stage('build') {
-            steps {
-                emailext 	subject: "Training Playground (Jenkins) - Email subject",
-							to: "bernardo.bessa@celfocus.com",
-							body: "Done"
-            }
-        }
-    }
+    
+    	stages {
+        	stage('build') {
+            		steps {
+                		emailext 	subject: "Training Playground (Jenkins) - Email subject",
+						to: "bernardo.bessa@celfocus.com",
+						body: "Done"
+            		}
+        	}
+    	}
 }
