@@ -14,7 +14,8 @@ pipeline {
         stage('run') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "JenkinsUsernamePassword", usernameVariable: 'JENKINS_USERNAME', passwordVariable: 'JENKINS_PASSWORD']]) {
-	                sh "java -jar jenkins-cli.jar -s http://jenkins:8080 -auth $JENKINS_USERNAME:$JENKINS_PASSWORD help"
+	                sleep 3600
+			sh "java -jar jenkins-cli.jar -s http://jenkins:8080 -auth $JENKINS_USERNAME:$JENKINS_PASSWORD help"
 	            } 
             }
         }
